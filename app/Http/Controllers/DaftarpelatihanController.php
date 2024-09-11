@@ -46,6 +46,7 @@ class DaftarpelatihanController extends Controller
         'status' => 'required',
         'klaster' => 'required',
         'pilihan' => 'required',
+        'id_pelatihan' => 'required',
         'pdf' => 'required|file|mimes:pdf|max:8192' // max 8MB
     ]);
 

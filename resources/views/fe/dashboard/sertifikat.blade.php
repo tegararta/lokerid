@@ -24,35 +24,49 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<!-- Versi terbaru dari jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
     document.getElementById('download-btn').addEventListener('click', function () {
-        // Ambil elemen gambar sertifikat
+        const { jsPDF } = window.jspdf;
+        
+        // Buat PDF dalam orientasi landscape
+        var pdf = new jsPDF('l', 'mm', 'a4');
+
+        // Ambil gambar sertifikat
         var imgElement = document.getElementById('sertifikat-image');
+        var imgURL = imgElement.src;
 
-        html2canvas(imgElement).then(function (canvas) {
-            // Dapatkan dimensi gambar asli
-            var imgWidth = canvas.width;
-            var imgHeight = canvas.height;
+        // Buat objek gambar baru
+        var img = new Image();
+        img.src = imgURL;
 
-            // Hitung skala untuk menyesuaikan dengan PDF
-            var pdfWidth = imgWidth * 0.264583; // Ubah dari pixel ke mm (1 px = 0.264583 mm)
-            var pdfHeight = imgHeight * 0.264583;
+        img.onload = function () {
+            // Hitung skala gambar sesuai dengan halaman A4
+            var imgWidth = this.width * 0.264583; // Ubah dari pixel ke mm
+            var imgHeight = this.height * 0.264583;
 
-            // Buat PDF dalam orientasi landscape
-            var pdf = new jsPDF('l', 'mm', [pdfWidth, pdfHeight]);
+            // Sesuaikan gambar ke ukuran A4 (landscape)
+            var pageWidth = pdf.internal.pageSize.getWidth();
+            var pageHeight = pdf.internal.pageSize.getHeight();
+            var ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+            var finalWidth = imgWidth * ratio;
+            var finalHeight = imgHeight * ratio;
+            var xOffset = (pageWidth - finalWidth) / 2;
+            var yOffset = (pageHeight - finalHeight) / 2;
 
             // Tambahkan gambar ke PDF
-            var imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.addImage(img, 'JPEG', xOffset, yOffset, finalWidth, finalHeight);
 
             // Simpan PDF dengan ukuran yang disesuaikan
             pdf.save('sertifikat.pdf');
-        });
+        };
+
+        img.onerror = function () {
+            alert('Gagal memuat gambar.');
+        };
     });
 </script>
-
 
 @endsection

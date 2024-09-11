@@ -133,6 +133,13 @@
           <span>Peserta Pelatihan</span>
         </a>
       </li>
+      <li class="nav-item">
+    <a class="nav-link {{ ($title === 'Data Dosen') ? '' : 'collapsed' }}" href="{{ route('datadosen.index') }}">
+        <i class="bi bi-person-add"></i>
+        <span>Data Dosen</span>
+    </a>
+</li>
+
       <!-- End Dashboard Nav -->
 
 

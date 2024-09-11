@@ -20,6 +20,7 @@ use App\Http\Controllers\AdminPengajuanDanaController;
 use App\Http\Controllers\FepelatihanController;
 use App\Http\Controllers\InfopelatihanController;
 use App\Http\Controllers\PesertapelatihanController;
+use App\Http\Controllers\DosenController;
 use App\Models\Infopelatihan;
 
 /*
@@ -103,6 +104,9 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/infopel',InfopelatihanController::class);
     
     Route::resource('/pesertapelatihan',PesertapelatihanController::class);
+    Route::get('/datadosen', [DosenController::class, 'index'])->name('datadosen.index');
+    Route::get('/datadosen/{id}', [DosenController::class, 'show'])->name('datadosen.show');
+
     
     
 

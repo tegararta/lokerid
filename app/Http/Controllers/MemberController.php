@@ -128,7 +128,7 @@ public function lihatSertifikat()
     $member = auth('member')->user();
 
     // Debugging: Tambahkan log untuk memeriksa member
-    \Log::info('Member:', ['member' => $member]);
+    Log::info('Member:', ['member' => $member]);
 
     // Atur pesan berdasarkan keberadaan sertifikat
     $message = $member->sertifikat ? '' : 'Anda belum memiliki sertifikat.';
@@ -137,32 +137,32 @@ public function lihatSertifikat()
     return view('fe.dashboard.sertifikat', compact('member', 'message'));
 }
 
-// public function downloadSertifikat($id) {
-//     $member = Member::find($id);
+public function downloadSertifikat($id) {
+    $member = Member::find($id);
 
-//     if ($member && $member->sertifikat) {
-//         // Dapatkan URL gambar
-//         $imageUrl = asset($member->sertifikat);
+    if ($member && $member->sertifikat) {
+        // Dapatkan URL gambar
+        $imageUrl = asset($member->sertifikat);
 
-//         // Inisialisasi Dompdf
-//         $dompdf = new Dompdf();
-//         $options = $dompdf->getOptions();
-//         $options->set('isRemoteEnabled', true); // Aktifkan pemuatan gambar dari URL
-//         $dompdf->setOptions($options);
+        // Inisialisasi Dompdf
+        $dompdf = new Dompdf();
+        $options = $dompdf->getOptions();
+        $options->set('isRemoteEnabled', true); // Aktifkan pemuatan gambar dari URL
+        $dompdf->setOptions($options);
 
-//         // Buat HTML untuk PDF
-//         $html = '<img src="' . $imageUrl . '" style="width:100%; height:auto;">';
-//         $dompdf->loadHtml($html);
+        // Buat HTML untuk PDF
+        $html = '<img src="' . $imageUrl . '" style="width:100%; height:auto;">';
+        $dompdf->loadHtml($html);
 
-//         // Render PDF
-//         $dompdf->render();
+        // Render PDF
+        $dompdf->render();
 
-//         // Kirim file PDF sebagai respon download
-//         return $dompdf->stream('sertifikat.pdf');
-//     }
+        // Kirim file PDF sebagai respon download
+        return $dompdf->stream('sertifikat.pdf');
+    }
 
-//     return redirect()->back()->with('error', 'Sertifikat tidak ditemukan.');
-// }
+    return redirect()->back()->with('error', 'Sertifikat tidak ditemukan.');
+}
 
 
 }

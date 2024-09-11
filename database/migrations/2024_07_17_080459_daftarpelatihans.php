@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('daftarpelatihans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_member')->references('id')->on('members')->cascadeOnDelete();
+            $table->foreignId('id_pelatihan')->references('id')->on('pelatihans')->cascadeOnDelete();
             $table->string('nama');
             $table->string('nik');
             $table->string('ttl');
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->string('kelamin');
             $table->string('status');
             $table->string('klaster');
-            $table->string('pilihan');
             $table->string('pdf');
             $table->timestamps();
         });

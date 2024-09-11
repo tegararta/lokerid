@@ -42,6 +42,11 @@
                                 required>
                         </div>
                         <div class="form-group">
+                            <label>Jadwal</label>
+                            <input type="date" name="jadwal" class="form-control" placeholder="lokasi"
+                                required>
+                        </div>
+                        <div class="form-group">
                             <label>Deskripsi</label>
                             <textarea maxlength="120" type="text" name="deskripsi" class="form-control"
                                 placeholder="Masukkan deskripsi" required></textarea>
@@ -75,10 +80,11 @@
                 <table class="table table-bordered table-hover" id="datatable">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">No</th>
                             <th scope="col">Judul</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Pelatihan</th>
+                            <th scope="col">Jadwal Pelatihan</th>
                             <th scope="col">Lokasi</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -91,6 +97,7 @@
                             <td>{{ $artikels->judul }}</td>
                             <td>{{ $artikels->nama }}</td>
                             <td>{{ $artikels->pelatihan }}</td>
+                            <td>{{ $artikels->jadwal }}</td>
                             <td>{{ $artikels->lokasi }}</td>
                             <td class="text-center">
                                 {{-- <div class="btn-group">

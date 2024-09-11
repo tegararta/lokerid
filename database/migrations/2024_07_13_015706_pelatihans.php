@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('pelatihan');
             $table->string('lokasi');
             $table->string('deskripsi');
+            $table->date('jadwal');
             $table->string('foto');
             $table->timestamps();
         });

@@ -129,12 +129,13 @@
           <!-- Alat Musik Pilihan -->
           <div class="mb-3">
               <label for="pilihan" class="form-label">Judul - Pelatihan - Lokasi</label>
-              <select class="form-select" id="pilihan" name="pilihan" required>
-                  <option value="" disabled selected>Pilih Pelatihan</option>
-                  @foreach ($pelatihan as $l)
-                  <option value="{{ $l->judul }} - {{ $l->pelatihan }} - {{ $l->lokasi }}">{{ $l->judul }} - {{ $l->pelatihan }} - {{ $l->lokasi }}</option>
-                  @endforeach
-              </select>
+              <select class="form-select" id="id_pelatihan" name="id_pelatihan" required>
+              <option value="" disabled selected>Pilih Pelatihan</option>
+              @foreach ($pelatihan as $l)
+              <option value="{{ $l->id }}">{{ $l->judul }} - {{ $l->pelatihan }} - {{ $l->lokasi }}</option>
+              @endforeach
+          </select>
+
           </div>
           <!-- Pengalaman -->
           <div class="mb-3">
