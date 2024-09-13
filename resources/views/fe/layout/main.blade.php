@@ -19,7 +19,7 @@
     .navbar-nav .nav-link.active {
       font-weight: bold;
       color: #0056b3; /* Warna khusus untuk item aktif */
-      radius 8px;
+      border-radius: 8px; /* Memperbaiki typo "radius" menjadi "border-radius" */
     }
 
     .footer-widgets {
@@ -42,57 +42,119 @@
     .footer-widgets .menu-item a:hover {
       text-decoration: underline;
     }
+
+    .job-card {
+            border: 1px solid #e2c49e;
+            border-left: 5px solid #e2c49e;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            min-height: 300px;
+        }
+        .job-card .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .job-card .job-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .job-card .company-name {
+            color: #6c757d;
+        }
+        .job-card .job-details {
+            color: #6c757d;
+        }
+        .job-card .btn-custom {
+            background-color: #e2c49e;
+            color: #000;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            text-transform: uppercase;
+        }
+        .job-card .btn-custom:hover {
+            background-color: #d0a36c;
+        }
+
+        /* Custom Button */
+        .btn-orange {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background-color: #e64a19;
+        }
+
+        /* Ensure full width for the button */
+        .btn-custom {
+            width: 100%;
+        }
   </style>
 </head>
 
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #C1DDF6;">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <!-- Uncomment if you have a logo -->
-      <!-- <img src="img/loker-removebg-preview.png" alt="loker" style="height: 50px;"> -->
-      <h2 class="fw-bold">Lowongan Kerja</h2>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">BERANDA</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('loker') ? 'active' : '' }}" href="/loker">CARI LOKER</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('pelatihan') ? 'active' : '' }}" href="/pelatihan">CARI PELATIHAN</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('infopelatihan') ? 'active' : '' }}" href="/infopelatihan">INFO PELATIHAN</a>
-        </li>
-        @auth('member')
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="../img/teamm.jpg" alt="Profile" class="rounded-circle" width="30" height="30">
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/dashboard">Kelola akun</a></li>
-            <li>
-              <form method="POST" action="/member-logout">
-                @csrf
-                <button type="submit" class="dropdown-item">Logout</button>
-              </form>
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <!-- Uncomment if you have a logo -->
+        <!-- <img src="img/loker-removebg-preview.png" alt="loker" style="height: 50px;"> -->
+        <h2 class="fw-bold">Lowongan Kerja</h2>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">BERANDA</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('loker') ? 'active' : '' }}" href="/loker">CARI LOKER</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('pelatihan') ? 'active' : '' }}" href="/pelatihan">CARI PELATIHAN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('infopelatihan') ? 'active' : '' }}" href="/infopelatihan">INFO PELATIHAN</a>
+          </li>
+          @auth('member')
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="../img/teamm.jpg" alt="Profile" class="rounded-circle" width="30" height="30">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/dashboard">Kelola akun</a></li>
+              <li>
+                <form method="POST" action="{{ route('member.logout') }}">
+                  @csrf
+                  <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          @else
+          <!-- If user is not authenticated as a member -->
+          <li class="nav-item dropdown">
+              <a class="text-bold nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Login
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/member-login">Login Member</a></li>
+                <li><a class="dropdown-item" href="/instruktur-login">Login Instruktur</a></li>
+              </ul>
             </li>
-          </ul>
-        </li>
-        @endauth
-      </ul>
+          @endauth
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-
+  </nav>
 
   <!-- Carousel -->
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -113,6 +175,16 @@
       </div>
       <!-- Add more carousel items if needed -->
     </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 
   <!-- Main Content -->

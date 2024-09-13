@@ -99,9 +99,9 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $pp->nama }}</td>
                 <td>{{ $pp->nik }}</td>
-                <td>{{ $pp->kelamin }}</td>
+                <td>{{ $pp->jenis_kelamin }}</td>
                 <td>{{ $pp->klaster }}</td>
-                <td>{{ $pp->pilihan }}</td>
+                <td>{{ $pp->pelatihan ? $pp->pelatihan->pelatihan : 'Tidak ada pelatihan' }}</td>
                 <td>{{ $pp->alamat }}</td>
                 <td>{{ $pp->nowa }}</td>
                 <td>{{ $pp->ttl }}</td>

@@ -1,4 +1,4 @@
-@extends('be.partials.main')
+@extends('instruktur.partials.main')
 @section('container')
 
 <div class="container">

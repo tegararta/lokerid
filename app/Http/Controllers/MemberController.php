@@ -22,7 +22,7 @@ class MemberController extends Controller
     {
         $credentials = $request->only('username', 'password');
         if (Auth::guard('member')->attempt($credentials)) {
-            return redirect()->intended('/');
+            return redirect()->intended('/index');
         }
         return back()->withErrors(['username' => 'Username atau password salah.']);
     }
@@ -65,14 +65,14 @@ class MemberController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/member-login'); // Redirect to the login page or any other page
+        return redirect('/')->with('status', 'Logout berhasil.');; // Redirect to the login page or any other page
     }
 
     public function pilihMember()
     {
         $title = 'Pengajuan Dana';
         $members = Member::all(); // Ambil semua member
-        return view('be.pengajuan.sertifikat', compact('members', 'title'));
+        return view('instruktur.sertifikat.sertifikat', compact('members', 'title'));
     }
     
 
@@ -80,7 +80,7 @@ class MemberController extends Controller
     {
         $title = 'Pengajuan Dana';
         $member = Member::findOrFail($request->input('member_id'));
-        return view('be.pengajuan.sertifikat_upload', compact('member','title'));
+        return view('instruktur.sertifikat.sertifikat_upload', compact('member','title'));
     }
     
 

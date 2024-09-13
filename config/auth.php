@@ -41,8 +41,12 @@ return [
             'provider' => 'users',
         ],
         'member' => [
-        'driver' => 'session',
-        'provider' => 'members',
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
+        'instruktur' => [
+            'driver' => 'session',
+            'provider' => 'instrukturs',
         ],
     ],
 
@@ -69,14 +73,13 @@ return [
             'model' => App\Models\User::class,
         ],
         'members' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Member::class,
-    ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
+        ],
+        'instrukturs' => [ 
+            'driver' => 'eloquent',
+            'model' => App\Models\Instruktur::class,
+        ],
     ],
 
     /*

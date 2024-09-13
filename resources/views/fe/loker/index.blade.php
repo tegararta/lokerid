@@ -1,69 +1,6 @@
 @extends('fe.layout.main')
 @section('container')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lowongan Kerja</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <style>
-        .job-card {
-            border: 1px solid #e2c49e;
-            border-left: 5px solid #e2c49e;
-            border-radius: 0.375rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            min-height: 300px;
-        }
-        .job-card .company-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
-        .job-card .job-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #0d6efd;
-        }
-        .job-card .company-name {
-            color: #6c757d;
-        }
-        .job-card .job-details {
-            color: #6c757d;
-        }
-        .job-card .btn-custom {
-            background-color: #e2c49e;
-            color: #000;
-            border: none;
-            border-radius: 0.25rem;
-            padding: 0.375rem 0.75rem;
-            text-transform: uppercase;
-        }
-        .job-card .btn-custom:hover {
-            background-color: #d0a36c;
-        }
-
-        /* Custom Button */
-        .btn-orange {
-            background-color: #ff5722;
-            color: white;
-        }
-
-        .btn-orange:hover {
-            background-color: #e64a19;
-        }
-
-        /* Ensure full width for the button */
-        .btn-custom {
-            width: 100%;
-        }
-
-    </style>
-</head>
 <body>
     <div class="container mt-4">
         <div class="row g-3">
@@ -123,7 +60,6 @@
             
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var paragraph = document.getElementById("text");

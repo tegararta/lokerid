@@ -18,11 +18,16 @@ return new class extends Migration
             $table->string('pelatihan');
             $table->string('lokasi');
             $table->string('deskripsi');
-            $table->date('jadwal');
+            $table->string('hari');
+            $table->string('jenis');
+            $table->string('ruangan');
             $table->string('foto');
+            $table->time('start'); // Menambahkan kolom untuk menyimpan jam
+            $table->time('end');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

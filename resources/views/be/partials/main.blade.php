@@ -31,35 +31,42 @@
 
 
   <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
     }
+
     .container {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
+
     .header {
-        background: #0000ff;
-        color: white;
-        padding: 15px;
-        text-align: center;
+      background: #0000ff;
+      color: white;
+      padding: 15px;
+      text-align: center;
     }
+
     .content {
-        flex: 1; /* Konten akan mengambil ruang yang tersisa */
-        overflow-y: auto; /* Scroll secara vertikal jika konten melebihi tinggi */
-        padding: 20px;
-        background-color: #f4f4f4;
+      flex: 1;
+      /* Konten akan mengambil ruang yang tersisa */
+      overflow-y: auto;
+      /* Scroll secara vertikal jika konten melebihi tinggi */
+      padding: 20px;
+      background-color: #f4f4f4;
     }
+
     .footer {
-        background: #ddd;
-        color: black;
-        padding: 10px;
-        text-align: center;
+      background: #ddd;
+      color: black;
+      padding: 10px;
+      text-align: center;
     }
-</style>
+  </style>
 </head>
 
 <body>
@@ -68,7 +75,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/admin" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Loker</span>
       </a>
@@ -77,7 +84,7 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-       @include('be.partials.navbar')
+        @include('be.partials.navbar')
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -88,21 +95,20 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item">
         <a class="nav-link {{ ($title === 'Kelola Admin') ? '' : 'collapsed' }}" href="/admin">
           <i class="bi bi-people"></i>
           <span>Kelola Admin</span>
         </a>
       </li>
-      
+
       <li class="nav-item">
         <a class="nav-link {{ ($title === 'Kelola Loker') ? '' : 'collapsed' }}" href="{{ route('lokerbe.index') }}">
           <i class="bi bi-journal-text"></i>
           <span>Kelola Loker</span>
         </a>
       </li>
-      
+
       <li class="nav-item">
         <a class="nav-link {{ ($title === 'Kelola Pelatihan') ? '' : 'collapsed' }}" href="{{ route('pelatihanbe.index') }}">
           <i class="bi bi-emoji-wink"></i>
@@ -116,50 +122,38 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ ($title === 'Pengajuan Dana') ? '' : 'collapsed' }}" href="/profilee">
-          <i class="bi bi-wrench-adjustable"></i>
-          <span>Kelola Profile</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ ($title === 'Info Pelatihan') ? '' : 'collapsed' }}" href="/infopel">
-          <i class="bi bi-book"></i>
-          <span>Info Pelatihan</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ ($title === 'Peserta Pelatihan') ? '' : 'collapsed' }}" href="/pesertapelatihan">
+        <a class="nav-link {{ ($title === 'Data Instruktur') ? '' : 'collapsed' }}" href="/pesertapelatihan">
           <i class="bi bi-person-add"></i>
           <span>Peserta Pelatihan</span>
         </a>
       </li>
       <li class="nav-item">
-    <a class="nav-link {{ ($title === 'Data Dosen') ? '' : 'collapsed' }}" href="{{ route('datadosen.index') }}">
-        <i class="bi bi-person-add"></i>
-        <span>Data Dosen</span>
-    </a>
-</li>
+        <a class="nav-link {{ ($title === 'Data Instruktur') ? '' : 'collapsed' }}" href="/datainstruktur">
+          <i class="bi bi-pen"></i>
+          <span>Data Instruktur</span>
+        </a>
+      </li>
 
       <!-- End Dashboard Nav -->
 
 
       {{-- <li class="nav-heading">Pages</li> --}}
-{{-- @can('posisi-ketua')
+      {{-- @can('posisi-ketua')
       <li class="nav-item">
         <a class="nav-link {{ ($title ==="Data Anggota") ? '' : 'collapsed' }}" href="/anggota">
-          <i class="bi bi-person"></i>
-          <span>Anggota</span>
-        </a>
+      <i class="bi bi-person"></i>
+      <span>Anggota</span>
+      </a>
       </li><!-- End Profile Page Nav -->
       @endcan --}}
       {{-- <li class="nav-item">
         <a class="nav-link {{ ($title ==="Register") ? '' : 'collapsed' }}" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
+      <i class="bi bi-card-list"></i>
+      <span>Register</span>
+      </a>
       </li><!-- End Register Page Nav --> --}}
 
-     <!-- End Blank Page Nav -->
+      <!-- End Blank Page Nav -->
 
     </ul>
 
@@ -180,10 +174,10 @@
     <section class="section dashboard">
       {{-- <div class="row"> --}}
 
-      
-        @yield('container')
 
-        <br><br><br><br>
+      @yield('container')
+
+      <br><br><br><br>
       {{-- </div> --}}
     </section>
 

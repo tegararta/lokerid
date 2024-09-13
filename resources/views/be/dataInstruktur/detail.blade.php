@@ -7,14 +7,15 @@
             <div class="col-md-6">
                 <h2 class="text-center mt-4">Detail Dosen</h2>
                 <div class="d-flex flex-column align-items-center">
-                    <img src="../img/dosen.jpg" alt="Foto Siswa" class="img-fluid rounded mb-4" style="max-width: 200px;">
-                    <h3 class="mt-4"><strong>{{ $dosen['nama'] }}</strong></h3>
+                    <img src="../img/fotoinstruktur/{{ $instruktur->foto }}" alt="Foto Siswa" class="img-fluid rounded mb-4" style="max-width: 200px;">
+                    <h3 class="mt-4"><strong>{{ $instruktur->nama }}</strong></h3>
                     <div class="col-md-7"> <!-- Margin kiri pada div Biodata -->
                         <h4><strong>Biodata Instruktur</strong></h4>
-                        <p><strong>NIP:</strong>{{ $dosen['nip'] }}</p>
-                        <p><strong>Jenis Kelamin:</strong> Laki-Laki</p>
-                        <p><strong>Kelas:</strong>{{ $dosen['kelas'] }}</p>
-                        <p><strong>Pelatihan:</strong> {{ $dosen['pelatihan'] }}</p>
+                        <p><strong>NIP:</strong>{{ $instruktur->nip }}</p>
+                        <p><strong>Jenis Kelamin:</strong>{{ $instruktur->jeniskelamin }}</p>
+                        <p><strong>Pelatihan:</strong>
+                            <td>{{ $instruktur->pelatihan->pelatihan ?? 'Tidak ada pelatihan' }}</td>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -33,9 +34,9 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>{{ $dosen['pelatihan'] }}</td>
-                                <td>{{ $dosen['jadwal'] }}</td>
-                                <td>Pertemuan</td>
+                                <td>{{ $instruktur->pelatihan->pelatihan ?? 'Tidak ada pelatihan' }}</td>
+                                <td>{{ $instruktur->pelatihan->hari ?? 'Tidak ada' }}/{{ $instruktur->pelatihan->start ?? 'Tidak ada' }}-{{ $instruktur->pelatihan->end ?? 'Tidak ada' }}/{{ $instruktur->pelatihan->ruangan ?? 'Tidak ada' }}</td>
+                                <td>{{ $instruktur->pelatihan->jenis ?? 'Tidak ada pelatihan' }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,26 +54,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($instruktur->pelatihan && $instruktur->pelatihan->daftarPelatihan->isNotEmpty())
+                                @foreach($instruktur->pelatihan->daftarPelatihan as $index => $daftar)
                                 <tr>
-                                    <td>1</td>
-                                    <td>{{ $dosen['pelatihan'] }}</td>
-                                    <td>
-                                    <ul>
-                @foreach($dosen['siswa'] as $siswa)
-                    <li>{{ $siswa }}</li> <!-- Setiap siswa dalam list item -->
-                @endforeach
-            </ul>
-                                    </td>
-                                    <td>{{ $dosen['kelas'] }}</td>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $daftar->pelatihan->pelatihan }}</td>
+                                    <td>{{ $daftar->nama }}</td>
+                                    <td>{{ $daftar->jenis }}</td>
                                 </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="4" class="text-center">Data siswa belum ada</td>
+                                </tr>
+                                @endif
                             </tbody>
+
+
                         </table>
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-center mt-4">
-            <a href="{{ route('datadosen.index') }}" class="btn btn-primary">Kembali ke Daftar Dosen</a>
+            <a href="{{ url('/datainstruktur') }}" class="btn btn-primary">Kembali ke Daftar Dosen</a>
         </div>
     </div>
     @endsection

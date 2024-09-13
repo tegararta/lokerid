@@ -16,7 +16,7 @@ class PelatihanController extends Controller
     {
         $title = 'Kelola Pelatihan';
         $pelatihan = Pelatihan::all();
-        return view('be.pelatihan.index',compact('pelatihan','title'));
+        return view('be.pelatihan.index', compact('pelatihan', 'title'));
     }
 
     /**
@@ -32,29 +32,33 @@ class PelatihanController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        $validatedData = $request->validate([
+            'judul' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'pelatihan' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'deskripsi' => 'required|string|max:120',
+            'hari' => 'required|string|max:255',
+            'jenis' => 'required|string',
+            'ruangan' => 'required|string|max:255',
+            'start' => 'required|date_format:H:i',  // Validasi waktu mulai
+            'end' => 'required|date_format:H:i',    // Validasi waktu selesai
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validasi foto
+        ]);
 
-        // Pastikan yang diunggah adalah file foto
+        // Menyimpan foto
         if ($foto = $request->file('foto')) {
             $destinationPath = public_path('img/pelatihan');
             $fotoName = date('YmdHis') . "." . $foto->getClientOriginalExtension();
-
-            // Coba pindahkan file dan cek hasilnya
-            if ($foto->move($destinationPath, $fotoName)) {
-                $input['foto'] = $fotoName;
-            } else {
-                // Jika pemindahan gagal, kembalikan user ke form dengan pesan error
-                return back()->with('error', 'Gagal menyimpan file foto.');
-            }
-        } else {
-            return back()->with('error', 'Harap pilih file foto untuk diunggah.');
+            $foto->move($destinationPath, $fotoName);
+            $validatedData['foto'] = $fotoName;
         }
 
-        Pelatihan::create($input);
+        Pelatihan::create($validatedData);
+
         return redirect()->route('pelatihanbe.index')->with('sukses', 'Data berhasil ditambahkan');
-
-
     }
+
 
     /**
      * Display the specified resource.
@@ -71,7 +75,7 @@ class PelatihanController extends Controller
     {
         $title = 'Kelola Pelatihan';
         $pelatihan = Pelatihan::findOrFail($id);
-        return view('be.pelatihan.edit',compact('pelatihan','title'));
+        return view('be.pelatihan.edit', compact('pelatihan', 'title'));
     }
 
     /**
@@ -82,7 +86,7 @@ class PelatihanController extends Controller
         $pelatihan = Pelatihan::find($id);
 
         $input = $request->all();
-        
+
         // Cek apakah ada file foto yang dikirimkan dalam request
         if ($image = $request->file('foto')) {
             // Hapus foto lama jika ada
@@ -92,7 +96,7 @@ class PelatihanController extends Controller
                     unlink($oldImagePath);
                 }
             }
-        
+
             // Simpan foto baru
             $destinationPath = 'img/pelatihan/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -101,10 +105,10 @@ class PelatihanController extends Controller
         } else {
             unset($input['foto']);
         }
-        
+
         // Update data pelatihan dari request
         $pelatihan->update($input);
-        
+
         return redirect()->route('pelatihanbe.index')->with('sukses', 'Data berhasil diperbarui');
     }
 
@@ -115,9 +119,9 @@ class PelatihanController extends Controller
     {
         try {
             $pelatihan = Pelatihan::findOrFail($id); // Pastikan pelatihan ditemukan
-    
+
             $gambarPath = public_path('img/pelatihan/' . $pelatihan->foto);
-    
+
             if (is_file($gambarPath)) {
                 if (file_exists($gambarPath)) {
                     unlink($gambarPath);
@@ -128,10 +132,10 @@ class PelatihanController extends Controller
             } else {
                 Log::warning('Path bukan file: ' . $gambarPath);
             }
-    
+
             $pelatihan->delete();
             Log::info('pelatihan berhasil dihapus: ID ' . $id);
-    
+
             return redirect()->route('pelatihanbe.index')->with('sukses', 'Data berhasil dihapus!');
         } catch (\Exception $e) {
             Log::error('Error menghapus data: ' . $e->getMessage());

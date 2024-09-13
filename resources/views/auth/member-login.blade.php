@@ -1,5 +1,10 @@
-@extends('fe.layout.main')
+@extends('auth.layout.main')
 @section('container')
+@auth('member')
+<div class="text-center mt-3">
+    <a href="/dashboard" class="text-decoration-none">sudah login</a>
+</div>
+@else
 <form method="POST" action="/member-login" class="mx-auto mt-5 p-4 shadow-lg rounded-3 bg-light" style="max-width: 400px;">
     @csrf
     <h2 class="text-center mb-4">Login</h2>
@@ -33,5 +38,5 @@
         <a href="/member-register" class="text-decoration-none">Belum memiliki akun?</a>
     </div>
 </form>
-
+@endauth
 @endsection

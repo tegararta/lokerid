@@ -11,12 +11,13 @@ class PesertapelatihanController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // app/Http/Controllers/PesertapelatihanController.php
+
     public function index()
     {
         $title = 'Peserta Pelatihan';
-        $pesertapelatihan = Daftarpelatihan::all();
-        $user = User::all();
-        return view('be.pesertapelatihan.index',compact('title','pesertapelatihan','user'));
+        $pesertapelatihan = Daftarpelatihan::with('pelatihan')->get();
+        return view('be.pesertapelatihan.index', compact('title', 'pesertapelatihan'));
     }
 
     /**
@@ -44,7 +45,7 @@ class PesertapelatihanController extends Controller
         ]);
 
         Pesertapelatihan::create($validateData);
-        return redirect(route('pesertapelatihan.index'))->with('sukses','Data berhasil ditambahkan');
+        return redirect(route('pesertapelatihan.index'))->with('sukses', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -78,6 +79,6 @@ class PesertapelatihanController extends Controller
     {
         $pesertapelatihan = Pesertapelatihan::findOrFail($id);
         $pesertapelatihan->delete();
-        return redirect(route('pesertapelatihan.index'))->with('sukses','Data berhasil dihapus');
+        return redirect(route('pesertapelatihan.index'))->with('sukses', 'Data berhasil dihapus');
     }
 }

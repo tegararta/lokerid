@@ -8,7 +8,7 @@ class DosenController extends Controller
 {
     public function index()
     {
-        $title = 'Data Dosen';
+        $title = 'Data Dodffsen';
 
         // Data dosen statis
         $dosenList = [
@@ -47,7 +47,7 @@ class DosenController extends Controller
         ];
 
         // Kirim data ke view
-        return view('be.dataDosen.index', compact('title', 'dosenList'));
+        return view('instruktur.dataDosen.index', compact('title', 'dosenList'));
     }
     public function show($id)
     {
@@ -90,13 +90,13 @@ class DosenController extends Controller
 
         // Pastikan id yang diterima valid
         if (!isset($dosenList[$id])) {
-            return redirect('/datadosen')->with('error', 'Data dosen tidak ditemukan.');
+            return redirect('/data1')->with('error', 'Data dosen tidak ditemukan.');
         }
 
         // Ambil data dosen berdasarkan ID
         $dosen = $dosenList[$id];
 
         // Tampilkan halaman detail dengan data dosen
-        return view('be.dataDosen.detail', compact('title', 'dosen'));
+        return view('instruktur.dataDosen.detail', compact('title', 'dosen'));
     }
 }

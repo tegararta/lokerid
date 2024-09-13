@@ -24,10 +24,13 @@ return new class extends Migration
             $table->string('pendidikan');
             $table->string('pekerjaan');
             $table->string('nowa');
+            $table->string('usia');
             $table->string('terpadu')->nullable();
-            $table->string('kelamin');
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
+            $table->enum('kelas', ['A', 'B', 'C', 'D']);
             $table->string('status');
             $table->string('klaster');
+            $table->string('foto');
             $table->string('pdf');
             $table->timestamps();
         });

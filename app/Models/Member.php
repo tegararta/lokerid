@@ -22,4 +22,9 @@ class Member extends Authenticatable
         return $this->hasMany(PengajuanDana::class);
     }
 
+    public function daftarpelatihan()
+    {
+        return $this->hasMany(Daftarpelatihan::class, 'id_member');
+    }
+
 }

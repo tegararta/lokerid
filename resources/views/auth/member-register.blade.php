@@ -1,4 +1,4 @@
-@extends('fe.layout.main')
+@extends('auth.layout.main')
 @section('container')
 
 <form method="POST" action="/member-register" class="mx-auto mt-5 p-4 shadow-lg rounded-3 bg-light" style="max-width: 400px;" id="register-form">
