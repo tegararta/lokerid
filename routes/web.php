@@ -135,12 +135,21 @@ Route::middleware(['auth.instruktur'])->group(function() {
     Route::get('/datadiri', function() {
         $title = "instruktur";
         $instrukturId = auth('instruktur')->id();
-        $instruktur = Instruktur::with(['pelatihan.daftarPelatihan'])->find($instrukturId);
+        $instruktur = Instruktur::with(['pelatihan.daftarpelatihan.member'])->find($instrukturId);
+        $peserta = collect(); // Inisialisasi sebagai koleksi
+    
         if (!$instruktur) {
             abort(404);
         }
-        return view('instruktur.detailInstruktur.index', compact('title', 'instruktur'));
-    })->name('datainstruktur.show1');
+    
+        foreach ($instruktur->pelatihan->daftarpelatihan as $daftarPelatihan) {
+            if ($daftarPelatihan->member) {
+                $peserta->push($daftarPelatihan->member); // Tambahkan member ke dalam koleksi
+            }
+        }
+    
+        return view('instruktur.detailInstruktur.index', compact('title', 'instruktur', 'peserta'));
+    })->name('datainstruktur.show1');    
 });
 
 Route::get('/pelatihan', function () {

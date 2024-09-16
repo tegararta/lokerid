@@ -34,56 +34,50 @@
                             </thead>
                             <tbody>
                                 @if ($instruktur->pelatihan && $instruktur->pelatihan->daftarpelatihan->isNotEmpty())
-                                    @foreach ($instruktur->pelatihan->daftarpelatihan as $index => $daftarPelatihan)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $daftarPelatihan->pelatihan->pelatihan ?? 'Tidak ada pelatihan' }}</td>
-                                            <td>{{ $daftarPelatihan->kelas ?? 'Tidak ada' }}/{{ $daftarPelatihan->pelatihan->hari ?? 'Tidak ada' }}/{{ $daftarPelatihan->pelatihan->start ?? 'Tidak ada' }}-{{ $daftarPelatihan->pelatihan->end ?? 'Tidak ada' }}/{{ $daftarPelatihan->pelatihan->ruangan ?? 'Tidak ada' }}
-                                            </td>
-                                            <td>{{ $daftarPelatihan->pelatihan->jenis ?? 'Tidak ada pelatihan' }}</td>
-                                        </tr>
-                                    @endforeach
+                                    @php
+                                        $pelatihan = $instruktur->first();
+                                        $daftarpelatihan = $instruktur->pelatihan->daftarPelatihan->first();
+                                    @endphp
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{ $pelatihan->pelatihan->pelatihan ?? 'Tidak ada pelatihan' }}</td>
+                                        <td>{{ $daftarpelatihan->kelas ?? 'Tidak ada' }}/{{ $pelatihan->pelatihan->hari ?? 'Tidak ada' }}/{{ $pelatihan->pelatihan->start ?? 'Tidak ada' }}-{{ $pelatihan->pelatihan->end ?? 'Tidak ada' }}/{{ $pelatihan->pelatihan->ruangan ?? 'Tidak ada' }}
+                                        </td>
+                                        <td>{{ $pelatihan->pelatihan->jenis ?? 'Tidak ada pelatihan' }}</td>
+                                    </tr>
                                 @else
                                     <tr>
-                                        <td colspan="4" class="text-center">Data siswa belum ada</td>
+                                        <td colspan="4" class="text-center">jadwal belum ada</td>
                                     </tr>
                                 @endif
                             </tbody>
                         </table>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-center">Siswa</h3>
+                        <h3 class="text-center">Jumlah Peserta Terdaftar</h3>
                         <div class="table-responsive mt-4">
-                            <table class="table table-bordered">
-                                <thead>
+                            <table class="table table-bordered text-center">
+                                <thead class="thead-dark">
                                     <tr>
-                                        <th>No</th>
-                                        <th>Pelatihan</th>
-                                        <th>Nama Siswa</th>
-                                        <th>Kelas</th>
+                                        <th>Total Peserta</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($instruktur->pelatihan && $instruktur->pelatihan->daftarPelatihan->isNotEmpty())
-                                        @foreach ($instruktur->pelatihan->daftarPelatihan as $index => $daftar)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $daftar->pelatihan->pelatihan }}</td>
-                                                <td>{{ $daftar->nama }}</td>
-                                                <td>{{ $daftar->kelas }}</td>
-                                            </tr>
-                                        @endforeach
+                                    @if ($peserta->isNotEmpty())
+                                        <tr>
+                                            <td>{{ $peserta->count() }}</td> <!-- Menampilkan total siswa terdaftar -->
+                                        </tr>
                                     @else
                                         <tr>
-                                            <td colspan="4" class="text-center">Data siswa belum ada</td>
+                                            <td>Belum ada peserta terdaftar</td>
                                         </tr>
                                     @endif
-                                </tbody>
-
-
+                                </tbody>                                
                             </table>
                         </div>
                     </div>
+                    
+
                 </div>
             </div>
             <div class="text-center mt-4">

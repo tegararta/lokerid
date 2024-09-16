@@ -21,11 +21,14 @@
             <label for="member" class="form-label">Pilih Member</label>
             <select class="form-select" id="member" name="member_id" required>
                 <option disabled selected value="">Pilih Member</option>
+                <!-- Looping melalui daftar member -->
+                @foreach($peserta as $member)
                     <option value="{{ $member->id }}" 
                         @if($member->sertifikat) disabled @endif>
                         {{ $member->username }}
                         @if($member->sertifikat) - Sudah memiliki sertifikat @endif
                     </option>
+                @endforeach
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Pilih Member</button>

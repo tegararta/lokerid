@@ -18,6 +18,11 @@ class Instruktur extends Authenticatable
         return $this->hasOneThrough(DaftarPelatihan::class, Pelatihan::class, 'id_pelatihan', 'id_daftar_pelatihan', 'id', 'id');
     }
 
+    public function members()
+    {
+        return $this->hasManyThrough(Member::class, DaftarPelatihan::class, 'id_pelatihan', 'id', 'id', 'id_member');
+    }
+
     use Notifiable;
 
     // Daftar atribut yang dapat diisi secara massal

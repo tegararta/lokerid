@@ -82,8 +82,8 @@ class MemberController extends Controller
         foreach ($members->pelatihan->daftarpelatihan as $daftarPelatihan) {
             $peserta[] = $daftarPelatihan->member; // Mengakses member dari DaftarPelatihan
         }
-        // dd($peserta);
         return view('instruktur.sertifikat.sertifikat', compact('peserta', 'title'));
+        // dd($peserta);
     }
 
 
