@@ -78,7 +78,7 @@
     </div>
 
     <label for="formFile" class="form-label">Unggah Foto</label>
-    <input class="form-control @error('foto') is-invalid @enderror" name="foto" type="file" id="formFile" required>
+    <input class="form-control @error('foto') is-invalid @enderror" name="foto" type="file" id="formFile" accept=".png, .jpg, .jpeg" required>
     @error('foto')
     <div class="invalid-feedback">
         {{ $message }}

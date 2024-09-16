@@ -5,7 +5,7 @@
         <div class="d-flex">
             <!-- Biodata Siswa-->
             <div class="col-md-6">
-                <h2 class="text-center mt-4">Profil</h2>
+                <h2 class="text-center mt-4">Profil Peserta</h2>
                 <div class="d-flex flex-column align-items-center">
                     <img src="../img/member/{{ $memberBiodata->foto }}" alt="Foto Siswa" class="img-fluid rounded mb-4" style="max-width: 200px;">
                     <h3 class="mt-4"><strong>{{ $memberBiodata->nama }}</strong></h3>
@@ -59,20 +59,20 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Jenis Pelatihan</th>
                                     <th>Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($nilai as $index => $nil)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $nil->kelas }} </td>
+                                    <td>{{ $nil->jenispelatihan }}</td>
+                                    <td>{{ $nil->nilai }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

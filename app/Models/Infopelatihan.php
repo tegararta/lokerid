@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Infopelatihan extends Model
 {
+
     use HasFactory;
     protected $guarded = ['id'];
 }
+

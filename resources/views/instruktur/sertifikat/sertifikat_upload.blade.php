@@ -19,7 +19,7 @@
         @csrf
         <div class="mb-3">
             <label for="sertifikat" class="form-label">Upload Sertifikat</label>
-            <input type="file" class="form-control" id="sertifikat" name="sertifikat" required>
+            <input type="file" class="form-control" id="sertifikat" name="sertifikat" accept=".png, .jpg, .jpeg" required>
         </div>
         <button type="submit" class="btn btn-primary">Simpan Sertifikat</button>
     </form>

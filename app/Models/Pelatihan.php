@@ -17,6 +17,7 @@ class Pelatihan extends Model
 
     public function instrukturs()
     {
-        return $this->hasMany(Instruktur::class, 'id_pelatihan');
+        return $this->belongsTo(Instruktur::class, 'id_pelatihan');
     }
+    
 }

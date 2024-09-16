@@ -97,12 +97,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengajuandetail{id}/{status}', [AdminPengajuanDanaController::class, 'updateStatus'])->name('admin.pengajuan-dana.update-status');
     Route::get('/pengajuandetail/{id}', [AdminPengajuanDanaController::class, 'show'])->name('admin.pengajuan-dana.show');
 
-    // menambahkan sertifikat
-    
-
     // info Pelatihan
     Route::resource('/infopel',InfopelatihanController::class);
-    
     Route::resource('/pesertapelatihan',PesertapelatihanController::class);
 });
 
@@ -119,6 +115,8 @@ Route::middleware(['auth.instruktur'])->group(function() {
         return view('instruktur.peserta.index', compact('title', 'siswa'));
 
     });
+    Route::resource('/detailpeserta',PesertapelatihanController::class);
+    Route::resource('/deletepesertapelatihan',PesertapelatihanController::class);
     Route::resource('/inputnilai',NilaiMemberController::class);
     
     //Sertifikat
@@ -129,6 +127,9 @@ Route::middleware(['auth.instruktur'])->group(function() {
     Route::get('/pilih-member', [MemberController::class, 'pilihMember'])->name('sertifikat.pilih');
     Route::get('/upload-sertifikat', [MemberController::class, 'tampilkanFormUnggah'])->name('sertifikat.tampil');
     Route::post('/sertifikat/{id}', [MemberController::class, 'unggahSertifikat'])->name('sertifikat.upload');
+    Route::get('/inputnilai/{id}', [NilaiMemberController::class])->name('nilai.input');
+    Route::post('/nilai/store', [NilaiMemberController::class, 'store'])->name('nilai.store');
+
 
     //Datainstruktur
     Route::get('/datadiri', function() {
@@ -139,7 +140,7 @@ Route::middleware(['auth.instruktur'])->group(function() {
             abort(404);
         }
         return view('instruktur.detailInstruktur.index', compact('title', 'instruktur'));
-    })->name('datainstruktur.show');
+    })->name('datainstruktur.show1');
 });
 
 Route::get('/pelatihan', function () {

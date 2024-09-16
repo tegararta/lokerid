@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\NilaiMember;
 use Illuminate\Http\Request;
+use App\Models\Daftarpelatihan;
 
 class NilaiMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function show($id)
     {
-        $nilaiMembers = NilaiMember::with(['pelatihan', 'member'])->get();
-        return view('nilai_members.index', compact('nilaiMembers'));
+
+        
+        // $nilaiMembers = NilaiMember::with(['pelatihan', 'member'])->get();
+        // Pesan sukses
+        $data = Daftarpelatihan::where('id_member', $id)->first();
+        return view('instruktur.sertifikat.inputnilai', compact('data'));
     }
 
     /**
@@ -28,19 +33,27 @@ class NilaiMemberController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'id_pelatihan' => 'required|exists:pelatihans,id',
-            'id_member' => 'required|exists:members,id',
-            'jenispelatihan' => 'required|string|max:255',
-            'kelas' => 'required|string|max:255',
-            'nilai' => 'required|string|max:10',
-        ]);
+{
+    $request->validate([
+        'id_member' => 'required|exists:members,id',
+        'id_pelatihan' => 'required|exists:pelatihans,id',
+        'kelas' => 'required',
+        'nilai' => 'required|numeric',
+        'jenispelatihan' => 'required',
+    ]);
 
-        NilaiMember::create($validatedData);
+    // Simpan nilai ke database
+    NilaiMember::create([
+        'id_member' => $request->id_member,
+        'id_pelatihan' => $request->id_pelatihan,
+        'kelas' => $request->kelas,
+        'nilai' => $request->nilai,
+        'jenispelatihan' => $request->jenispelatihan,
+    ]);
 
-        return redirect()->route('instruktur.nilaipelatihan.index')->with('success', 'Nilai member berhasil ditambahkan.');
-    }
+    return redirect()->route('sertifikat.pilih')->with('success', 'Sertifikat & Nilai berhasil disimpan.');
+}
+
 
     /**
      * Show the form for editing the specified resource.

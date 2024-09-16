@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nilai_members', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pelatihan')->references('id')->on('pelatihans')->cascadeOnDelete();
+            $table->foreignId('id_pelatihan')->references('id')->on('pelatihans')->restrictOnDelete();
             $table->foreignId('id_member')->references('id')->on('members')->cascadeOnDelete();
             $table->string('jenispelatihan');
             $table->string('kelas');

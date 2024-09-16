@@ -51,8 +51,9 @@ class PesertapelatihanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pesertapelatihan $pesertapelatihan)
+    public function show($id)
     {
+        dd($id);
         //
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Daftarpelatihan;
 use App\Models\Instruktur;
+use App\Models\NilaiMember;
 use App\Models\Pelatihan;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,8 @@ class DaftarpelatihanController extends Controller
             $idPelatihan = $memberBiodata->id_pelatihan;
             $pelatihan = Pelatihan::find($idPelatihan);
             $instruktur = Instruktur::where('id_pelatihan', $idPelatihan)->get();
-
-            return view('fe.profil.dataUser.index', compact('memberBiodata', 'pelatihan', 'instruktur'));
+            $nilai = NilaiMember::where('id_member', $memberId)->get();
+            return view('fe.profil.dataUser.index', compact('memberBiodata', 'pelatihan', 'instruktur', 'nilai'));
         } else {
 
             return redirect()->back()->with('error', 'Data pelatihan tidak ditemukan.');
