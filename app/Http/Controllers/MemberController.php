@@ -75,14 +75,15 @@ class MemberController extends Controller
         $title = 'Pengajuan Dana';
         $instrukturId = auth('instruktur')->id();
         $members = Instruktur::with(['pelatihan.daftarpelatihan.member'])->find($instrukturId);
+        $peserta = [];
         if (!$members) {
             abort(404);
         }
         foreach ($members->pelatihan->daftarpelatihan as $daftarPelatihan) {
-            $member = $daftarPelatihan->member; // Mengakses member dari DaftarPelatihan
-            // dd($member);
-            return view('instruktur.sertifikat.sertifikat', compact('member', 'title'));
+            $peserta[] = $daftarPelatihan->member; // Mengakses member dari DaftarPelatihan
         }
+        // dd($peserta);
+        return view('instruktur.sertifikat.sertifikat', compact('peserta', 'title'));
     }
 
 
@@ -119,7 +120,7 @@ class MemberController extends Controller
                 $data = Daftarpelatihan::where('id_member', $id)->first();
                 // dd($data);
 
-                return redirect()->route('nilai.input', $id)->with('success', 'Nilai berhasil disimpan.');
+                return redirect()->route('nilai.input', $id)->with('success', 'Sertifikat berhasil disimpan.');
             }
         } catch (\Exception $e) {
             // Pesan error
