@@ -91,7 +91,13 @@
       <li class="nav-item">
         <a class="nav-link " href="/sertif">
           <i class="bi bi-wrench-adjustable"></i>
-          <span>Kelola Profile</span>
+          <span>Kelola sertifikat</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/absen">
+          <i class="bi bi-clipboard-check"></i>
+          <span>Absensi</span>
         </a>
       </li>
       <li class="nav-item">

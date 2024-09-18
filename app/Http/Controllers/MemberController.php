@@ -67,7 +67,7 @@ class MemberController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('status', 'Logout berhasil.');; // Redirect to the login page or any other page
+        return redirect('/member-login')->with('status', 'Logout berhasil.');; // Redirect to the login page or any other page
     }
 
     public function pilihMember()

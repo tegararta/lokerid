@@ -68,19 +68,19 @@
           </div>
           <div class="mb-3">
             <label for="nik" class="form-label">Nomor Induk Keluarga</label>
-            <input type="text" class="form-control" id="nik" name="nik" value="{{ old('nama', $memberBiodata->nik ?? '') }}"required>
+            <input type="text" class="form-control" id="nik" name="nik" value="{{ old('nik', $memberBiodata->nik ?? '') }}"required>
           </div>
           <div class="mb-3">
             <label for="ttl" class="form-label">Tempat Tanggal Lahir</label>
-            <input type="text" class="form-control" id="ttl" name="ttl" value="{{ old('nama', $memberBiodata->ttl ?? '') }}" required>
+            <input type="text" class="form-control" id="ttl" name="ttl" value="{{ old('ttl', $memberBiodata->ttl ?? '') }}" required>
           </div>
           <div class="mb-3">
             <label for="usia" class="form-label">Usia</label>
-            <input type="text" class="form-control" id="usia" name="usia" value="{{ old('nama', $memberBiodata->usia ?? '') }}"required>
+            <input type="text" class="form-control" id="usia" name="usia" value="{{ old('usia', $memberBiodata->usia ?? '') }}"required>
           </div>
           <div class="mb-3">
             <label for="agama" class="form-label">Agama</label>
-            <select class="form-select" name="agama" id="agama value="{{ old('nama', $memberBiodata->agama ?? '') }}"">
+            <select class="form-select" name="agama" id="agama value="{{ old('agama', $memberBiodata->agama ?? '') }}"">
               <option>pilih</option>
               <option value="Islam">Islam</option>
               <option value="Kristen">Kristen</option>
@@ -90,28 +90,28 @@
           </div>
           <div class="mb-3">
             <label for="alamat" class="form-label">Alamat Rumah</label>
-            <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('nama', $memberBiodata->alamat ?? '') }}"required>
+            <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat', $memberBiodata->alamat ?? '') }}"required>
           </div>
           <div class="mb-3">
             <label for="alamatdom" class="form-label">Alamat Domisili (apabila tidak tinggal di alamat ktp)</label>
-            <input type="text" class="form-control" id="alamatdom" name="alamatdom" value="{{ old('nama', $memberBiodata->alamatdom ?? '') }}">
+            <input type="text" class="form-control" id="alamatdom" name="alamatdom" value="{{ old('alamatdom', $memberBiodata->alamatdom ?? '') }}">
           </div>
           <div class="mb-3">
             <label for="pendidikan" class="form-label">Pendidikan</label>
-            <input type="text" class="form-control" id="pendidikan" name="pendidikan" value="{{ old('nama', $memberBiodata->pendidikan ?? '') }}" required>
+            <input type="text" class="form-control" id="pendidikan" name="pendidikan" value="{{ old('pendidikan', $memberBiodata->pendidikan ?? '') }}" required>
           </div>
           <div class="mb-3">
             <label for="pekerjaan" class="form-label">Pekerjaan saat ini</label>
-            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" value="{{ old('nama', $memberBiodata->pekerjaan ?? '') }}" required>
+            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" value="{{ old('pekerjaan', $memberBiodata->pekerjaan ?? '') }}" required>
           </div>
           <!-- Alamat Email -->
           <div class="mb-3">
             <label for="nowa" class="form-label">Nomor Wa</label>
-            <input type="number" class="form-control" id="nowa" name="nowa" value="{{ old('nama', $memberBiodata->nowa ?? '') }}" required>
+            <input type="number" class="form-control" id="nowa" name="nowa" value="{{ old('nowa', $memberBiodata->nowa ?? '') }}" required>
           </div>
           <div class="mb-3">
             <label for="terpadu" class="form-label">Data Terpadu kesejahteraan sosial (jika terdaftar)</label>
-            <input type="number" class="form-control" id="terpadu" name="terpadu" value="{{ old('nama', $memberBiodata->terpadu ?? '') }}">
+            <input type="number" class="form-control" id="terpadu" name="terpadu" value="{{ old('terpadu', $memberBiodata->terpadu ?? '') }}">
           </div>
           <div class="mb-3">
             <label class="form-label">Jenis Kelamin</label>

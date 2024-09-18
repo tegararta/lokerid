@@ -21,7 +21,7 @@ use App\Http\Controllers\BiodataMemberController;
 use App\Http\Controllers\FepelatihanController;
 use App\Http\Controllers\InfopelatihanController;
 use App\Http\Controllers\PesertapelatihanController;
-use App\Http\Controllers\DosenController;
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\InstrukturController;
 use App\Http\Controllers\NilaiMemberController;
 use App\Models\BiodataMember;
@@ -129,7 +129,14 @@ Route::middleware(['auth.instruktur'])->group(function() {
     Route::post('/sertifikat/{id}', [MemberController::class, 'unggahSertifikat'])->name('sertifikat.upload');
     Route::get('/inputnilai/{id}', [NilaiMemberController::class])->name('nilai.input');
     Route::post('/nilai/store', [NilaiMemberController::class, 'store'])->name('nilai.store');
-
+    // Route::get('/absensi', [MemberController::class, 'index'])->name('absensi.list');
+    // Route::post('/create-presensi', [NilaiMemberController::class, 'store'])->name('absensi.store');
+    Route::get('/absen',function(){
+        return view('instruktur.absensi.main');
+    });
+    Route::get('presensi', [AbsensiController::class, 'presensi'])->name('presensi.index');
+    Route::post('/presensi/store', [AbsensiController::class, 'store'])->name('presensi.store');
+    Route::get('presensi/download', [AbsensiController::class, 'downloadPdf'])->name('presensi.download');
 
     //Datainstruktur
     Route::get('/datadiri', function() {
